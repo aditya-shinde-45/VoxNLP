@@ -1,0 +1,21 @@
+fastapi==0.135.3
+uvicorn[standard]==0.41.0
+pydantic==2.12.5
+python-multipart==0.0.22
+torch==2.11.0
+torchaudio==2.11.0
+numpy==1.26.4
+scipy==1.14.1
+librosa==0.11.0
+contourpy==1.3.1
+# Maintained fork of Coqui TTS; it preserves the `TTS` import namespace and supports Python 3.12.
+coqui-tts[codec]==0.28.0
+spacy==3.7.6
+# Keep spaCy's compiled extensions aligned with the Python 3.12 wheels.
+murmurhash==1.0.10
+cymem==2.0.8
+preshed==3.0.9
+# English linguistic pipeline used for lemmas, POS tags, dependencies, and entities.
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
+pytest==8.4.2
+httpx==0.28.1

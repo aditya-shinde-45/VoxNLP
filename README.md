@@ -90,7 +90,7 @@ Update `frontend/.env` if the backend is running on another host or port. Do not
 Docker Desktop on Windows or macOS, or Docker Engine with Compose on Linux, can run the complete stack:
 
 ```bash
-docker compose up --build
+COQUI_TOS_AGREED=1 docker compose up --build
 ```
 
 Open the application at http://localhost:8444. The frontend Nginx server proxies `/api` requests to the backend, so no frontend API URL change is needed. The defaults avoid conflicts with the local development servers; override them with `FRONTEND_PORT=8443 BACKEND_PORT=8000 docker compose up --build` when those ports are free.

@@ -85,6 +85,53 @@ VITE_API_BASE_URL=http://localhost:8000/api
 
 Update `frontend/.env` if the backend is running on another host or port. Do not commit `.env`; use `.env.example` as the shareable template.
 
+## Docker Compose
+
+Docker Desktop on Windows or macOS, or Docker Engine with Compose on Linux, can run the complete stack:
+
+```bash
+docker compose up --build
+```
+
+Open the application at http://localhost:8444. The frontend Nginx server proxies `/api` requests to the backend, so no frontend API URL change is needed. The defaults avoid conflicts with the local development servers; override them with `FRONTEND_PORT=8443 BACKEND_PORT=8000 docker compose up --build` when those ports are free.
+
+The first backend startup downloads the XTTS-v2 model into the persistent `voxnlp-model-cache` volume and may take several minutes. The backend remains unavailable until model initialization completes. Generated audio uses the persistent `voxnlp-audio` volume.
+
+XTTS-v2 requires an explicit Coqui license choice. After reviewing the CPML terms at https://tts-hub.github.io/cpml, set `COQUI_TOS_AGREED=1` only if the non-commercial terms apply to your use, then start Compose:
+
+```bash
+COQUI_TOS_AGREED=1 docker compose up --build
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:COQUI_TOS_AGREED = "1"
+docker compose up --build
+```
+
+Leave the variable unset or set to `0` if you do not agree; the backend will start but speech generation and the voice list will remain unavailable.
+
+Check service state:
+
+```bash
+docker compose ps
+curl http://localhost:8001/api/health
+curl http://localhost:8444/api/voices
+```
+
+Stop the stack without deleting model or audio volumes:
+
+```bash
+docker compose down
+```
+
+To remove the persistent volumes as well:
+
+```bash
+docker compose down -v
+```
+
 ## Running tests and builds
 
 Backend tests:

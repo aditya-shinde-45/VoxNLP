@@ -1,4 +1,5 @@
 {
+  "title": "VoxNLP Speech Studio",
   "description": "Convert text into multilingual speech, manage generated audio, and analyze linguistic features with practical tools for writers, developers, and language professionals.",
   "robots": {
     "index": false

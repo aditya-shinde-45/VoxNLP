@@ -15,6 +15,7 @@ spacy==3.7.6
 murmurhash==1.0.10
 cymem==2.0.8
 preshed==3.0.9
+blis==0.7.11
 # English linguistic pipeline used for lemmas, POS tags, dependencies, and entities.
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
 pytest==8.4.2

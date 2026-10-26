@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      VOXNLP_CORS_ORIGINS: http://localhost:8443,http://127.0.0.1:8443
+      COQUI_TOS_AGREED: "${COQUI_TOS_AGREED:-0}"
+    ports:
+      - "${BACKEND_PORT:-8001}:8000"
+    volumes:
+      - voxnlp-model-cache:/root/.cache
+      - voxnlp-audio:/app/backend/data/audio
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_BASE_URL: /api
+    depends_on:
+      backend:
+        condition: service_started
+    ports:
+      - "${FRONTEND_PORT:-8444}:80"
+    restart: unless-stopped
+
+volumes:
+  voxnlp-model-cache:
+  voxnlp-audio:
